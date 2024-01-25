@@ -5,7 +5,7 @@ import { styles } from './styles';
 export function Groups() {
   return (
     <View style={styles.container}>
-      <Text>Group</Text>     
+         
     </View>
   );
 }
