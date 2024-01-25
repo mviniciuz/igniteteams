@@ -2,6 +2,7 @@ import { View, Image, TouchableOpacity } from "react-native";
 import { styles, colors } from "./styles";
 import {CaretLeft} from 'phosphor-react-native';
 
+
 import logo from '@assets/logo.png';
 
 type Props = {
