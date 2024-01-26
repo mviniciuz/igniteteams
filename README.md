@@ -2,7 +2,7 @@
 
 This application was built to help teams organizar seus hobbies and happy hours, they can create teams with participants or members by team, to confraternization with sports or games.
 
-<Img src="assets/readmesvg"/>
+<Img src="assets/readme.png"/>
 
 
 ### 📋 Prerequisites
