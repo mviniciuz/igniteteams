@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
   subTitle: {
     fontFamily: theme.FONT_FAMILY.REGULAR,
     color: theme.COLORS.GRAY_300,    
-    fontSize: theme.FONT_SIZE.MD
+    fontSize: theme.FONT_SIZE.MD,
+    textAlign: 'center'
   }
 
 })

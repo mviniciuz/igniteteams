@@ -4,8 +4,8 @@ import { theme } from '@theme/theme';
 export const styles = StyleSheet.create({
   containerColorPrimary:{
     width:'100%',
-    height: 50,
-    maxHeight: 90,
+    minHeight: 56,
+    maxHeight: 56,
     
     justifyContent: 'center',
     alignItems: 'center',
@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
   },
   containerColorSecondary:{
     width:'100%',
-    height: 50,
-    maxHeight: 90,
+    minHeight: 56,
+    maxHeight: 56,
     
     justifyContent: 'center',
     alignItems: 'center',

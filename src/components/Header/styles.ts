@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.COLORS.GRAY_600,
-    paddingTop: 20
+    paddingTop: 60
   },
   image: {
     height: 45,
@@ -17,8 +17,6 @@ export const styles = StyleSheet.create({
   },
   buttonBack:{
     flex:1,
-  
-
   }
 })
 

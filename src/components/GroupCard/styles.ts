@@ -17,9 +17,7 @@ export const styles = StyleSheet.create({
     fontFamily: theme.FONT_FAMILY.REGULAR,
     fontSize: theme.FONT_SIZE.MD,
     color: theme.COLORS.GRAY_100,
-    padding:24,
-
-    
+    padding:24,    
   }
 });
 
