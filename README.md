@@ -1,4 +1,4 @@
-# TODO LIST
+# IGNITE TEAMS
 
 This application was built to help teams organizar seus hobbies and happy hours, they can create teams with participants or members by team, to confraternization with sports or games.
 
