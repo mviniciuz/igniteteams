@@ -8,6 +8,7 @@ export function Input({...rest}: TextInputProps ){
     <TextInput
       style={styles.input}
       placeholderTextColor={colors.GRAY_300}
+      
       {...rest}
     /> 
   )

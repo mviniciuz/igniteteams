@@ -7,6 +7,7 @@ type Props = TouchableOpacityProps & {
   color?: 'primary' | 'secondary',
 }
 
+
 export function Button( { title, color = 'primary', ...rest }: Props ){
   return(
     <TouchableOpacity style={ 
