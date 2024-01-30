@@ -5,22 +5,20 @@ export const styles = StyleSheet.create({
   container: {
     height: 36,
     width: 70,
-
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 12,
+  
   
   },
 
   containerActive: {
     height: 36,
     width: 70,
-
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: theme.COLORS.GREEN_500,
-    marginLeft: 12
+  
   },
 
 
@@ -29,5 +27,6 @@ export const styles = StyleSheet.create({
     fontFamily: theme.FONT_FAMILY.BOLD,
     fontSize: theme.FONT_SIZE.SM,
     color: theme.COLORS.WHITE,
+    textAlign: 'center'
   }
 })

@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.COLORS.GREEN_700,
+    borderRadius: 6
 
   },
   containerColorSecondary:{
@@ -20,6 +21,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.COLORS.RED,
+    borderRadius: 6
 
   },
   title:{
