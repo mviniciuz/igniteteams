@@ -7,10 +7,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     minHeight: 56,
     maxHeight: 56,
-        
-    backgroundColor: theme.COLORS.GRAY_700, 
-    borderTopLeftRadius: 6,
-    borderBottomLeftRadius: 6,
+    width:'100%',
+    borderRadius: 6,
+    marginBottom: 12,        
+    backgroundColor: theme.COLORS.GRAY_700,
+    color: theme.COLORS.GRAY_300,
+    paddingLeft: 16,
+
    
     
   },

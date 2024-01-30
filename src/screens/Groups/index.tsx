@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { View, FlatList} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+
 import { Header } from '@components/Header';
 import { HighLights } from "@components/HighLights";
 import { GroupCard } from '@components/GroupCard';
@@ -9,10 +12,16 @@ import { Button } from '@components/Button';
 import { styles } from './styles';
 
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>(['turma01', 'turma02', 'turma03'])
+  const [groups, setGroups] = useState<string[]>(['turma01', 'turma02', 'turma03']);
+
+  const navigation = useNavigation();
+
+  function handleNewGroup(){
+    navigation.navigate('newGroup');    
+  }
 
   return ( 
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header />
       <HighLights
         title={'Turmas'}
@@ -31,8 +40,11 @@ export function Groups() {
         )}
         
       />
-      <Button title='Criar nova turma' />
+      <Button
+        title='Criar nova turma'
+        onPress={handleNewGroup}
+      />
          
-    </View>
+    </SafeAreaView>
   );
 }

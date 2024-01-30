@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { View, FlatList} from 'react-native';
+
+import { useRoute } from '@react-navigation/native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '@components/Header';
 import { HighLights } from '@components/HighLights';
 import { Input } from '@components/Input';
@@ -10,6 +14,10 @@ import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
 
 import { styles } from './styles';
+
+type RouteParams = {
+  group: string;
+}
 
 export function Players(){
   const [teams, setTeams] = useState(['Time A', 'Time B']);
@@ -27,16 +35,20 @@ export function Players(){
     'Patricia 08',
   ]);
 
+  const route = useRoute();
+
+  const { group } = route.params as RouteParams;
+
   return(
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header showBackButton/>
       <HighLights
-        title='Nome da turma'
+        title={group}
         subTitle='Adicione a galera e separe os times'
       />
       <View style={styles.formInput}>
         <Input
-          placeholder='     Nome do participante'
+          placeholder='Nome do participante'
           autoCorrect={false}
         />
         <ButtonIcon icon='add'/>
@@ -77,7 +89,7 @@ export function Players(){
        title='Remover Jogador'
        type='secondary'
       />
-    </View>
+    </SafeAreaView>
   )
 }
 
