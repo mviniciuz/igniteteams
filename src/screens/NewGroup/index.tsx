@@ -3,6 +3,8 @@ import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { groupCreate } from '@storage/group/groupCreate';
+
 import { styles, colors } from './styles';
 
 import { Header } from '@components/Header'
@@ -18,9 +20,14 @@ export function NewGroup(){
 
   const navigation = useNavigation();
 
-  function handleCreateNewGroup(){
+  async function handleCreateNewGroup(){
+    
+    await groupCreate(group);
+    
     navigation.navigate('players', { group });
   }
+
+
 
   return(
     <SafeAreaView style={styles.container}>
