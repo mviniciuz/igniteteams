@@ -10,7 +10,10 @@ type Props = TouchableOpacityProps & {
 export function GroupCard({ title, ...rest }: Props){
 
   return(
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity 
+      style={styles.container}
+      {...rest}
+    >
       <UsersThree
         size={32}
         color={colors.GREEN_500}

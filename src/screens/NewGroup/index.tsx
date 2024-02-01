@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { AppError } from '@utils/AppError';
 
 import { groupCreate } from '@storage/group/groupCreate';
 
@@ -20,11 +22,23 @@ export function NewGroup(){
 
   const navigation = useNavigation();
 
-  async function handleCreateNewGroup(){
-    
-    await groupCreate(group);
-    
-    navigation.navigate('players', { group });
+  async function handleCreateNewGroup(){    
+    try {
+
+      if(group.trim().length === 0){
+       return Alert.alert('Cadastro Novo', 'Informe um nome válido para a Turma!');
+      }
+
+      await groupCreate(group);
+      navigation.navigate('players', { group });
+      
+    } catch (error) {
+      if(error instanceof AppError){
+        Alert.alert('Cadastro Novo', error.message)
+      } else {
+        Alert.alert('Cadastro Novo', 'Não foi possível efetuar o cadastro');
+      }            
+    }  
   }
 
 
