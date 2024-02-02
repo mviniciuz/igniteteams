@@ -26,7 +26,7 @@ export function NewGroup(){
     try {
 
       if(group.trim().length === 0){
-       return Alert.alert('Cadastro Novo', 'Informe um nome válido para a Turma!');
+       return Alert.alert('New Group', 'Insert group name');
       }
 
       await groupCreate(group);
@@ -34,15 +34,13 @@ export function NewGroup(){
       
     } catch (error) {
       if(error instanceof AppError){
-        Alert.alert('Cadastro Novo', error.message)
+        Alert.alert('New Group', error.message)
       } else {
-        Alert.alert('Cadastro Novo', 'Não foi possível efetuar o cadastro');
+        Alert.alert('New Group', 'Error while registering the Group ');
       }            
     }  
   }
-
-
-
+  
   return(
     <SafeAreaView style={styles.container}>
       <Header showBackButton/>
@@ -51,13 +49,15 @@ export function NewGroup(){
           color={colors.GREEN_500}
           size={56}           
         />
-        <HighLights title='Nova Turma' subTitle='Crie uma turma para adicionar pessoas'/>
+        <HighLights title='New Group' subTitle='Create a classe to add people'/>
         <Input
-          placeholder='Nome da Turma'
+          placeholder='New Group'
           onChangeText={setGroup}
+          returnKeyType='done'
+          onSubmitEditing={handleCreateNewGroup}
         />
         <Button
-          title='Criar'
+          title='Add'
           onPress={handleCreateNewGroup}
         /> 
       </View>     

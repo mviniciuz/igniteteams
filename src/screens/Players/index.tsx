@@ -18,6 +18,8 @@ import { Button } from '@components/Button';
 import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
+import { Loading } from '@components/Loading';
+
 
 import { styles } from './styles';
 import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
@@ -28,9 +30,10 @@ type RouteParams = {
 }
 
 export function Players(){
+  const [isLoading, setIsLoading] = useState(true);
   const [playerName, setPlayerName] = useState('');
-  const [teams, setTeams] = useState(['Time A', 'Time B']);
-  const [activeTeam, setActiveTeam] = useState('Time A');
+  const [teams, setTeams] = useState(['Team A', 'Team B']);
+  const [activeTeam, setActiveTeam] = useState('Team A');
   const [players, setPlayers] = useState<PlayerStorageDTO[]>();
 
   const navigation = useNavigation();
@@ -107,17 +110,23 @@ export function Players(){
 
   async function fechtPlayersByTeam(){
     try {
+
+      setIsLoading(true);
+
       const playersByTeam = await playerGetByGroupAndTeam(group, activeTeam);
 
       setPlayers(playersByTeam);
+
+      setIsLoading(false);
       
     } catch (error) {
       if(error instanceof AppError){
-        Alert.alert('Carregando Time', error.message);
+        Alert.alert('Loading Team', error.message);
       } else {
-        Alert.alert('Carregando Time', 'Erro ao carregar times');
-      }
-      
+        Alert.alert('Loading Teams', 'Error to load Teams');
+      }      
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -130,12 +139,12 @@ export function Players(){
       <Header showBackButton/>
       <HighLights
         title={group}
-        subTitle='Adicione a galera e separe os times'
+        subTitle='Add people in your team'
       />
       <View style={styles.formInput}>
         <Input
           inputRef={newPlayerNameInputRef}
-          placeholder='Nome do participante'
+          placeholder='Player name'
           autoCorrect={false}
           onChangeText={setPlayerName}
           value={playerName}
@@ -161,28 +170,29 @@ export function Players(){
         )}
         horizontal      
       />
-
-      <FlatList
-        style={styles.listPlayer}      
-        data={players}
-        keyExtractor={ item => item.name}
-        renderItem={ ( { item } )=>(
-          <PlayerCard
-            name={item.name}
-            onDelete={() => handleRemovePlayer(item.name)}
-          />
-        )}
-        ListEmptyComponent={() =>(
-          <ListEmpty
-            message={'Não há jogadores na lista'}
-          />
-        )}
-        showsVerticalScrollIndicator={false}       
-      />
+      {isLoading ? <Loading/>:
+        <FlatList
+          style={styles.listPlayer}      
+          data={players}
+          keyExtractor={ item => item.name}
+          renderItem={ ( { item } )=>(
+            <PlayerCard
+              name={item.name}
+              onDelete={() => handleRemovePlayer(item.name)}
+            />
+          )}
+          ListEmptyComponent={() =>(
+            <ListEmpty
+              message={'List players is empty'}
+            />
+          )}
+          showsVerticalScrollIndicator={false}       
+        />
+      }
       <Button
-       title='Remover Jogador'
+       title='Remove team'
        type='secondary'
-       onPress={handleRemoveGroup}     
+       onPress={handleRemoveGroup}   
       />
     </SafeAreaView>
   )

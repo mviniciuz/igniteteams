@@ -8,14 +8,10 @@ export const styles = StyleSheet.create({
     minHeight: 56,
     maxHeight: 56,
     width:'100%',
-    borderRadius: 6,
-    marginBottom: 12,        
+    borderRadius: 6,       
     backgroundColor: theme.COLORS.GRAY_700,
     color: theme.COLORS.GRAY_300,
-    paddingLeft: 16,
-
-   
-    
+    paddingLeft: 16,   
   },
 })
 
