@@ -22,7 +22,7 @@ export function PlayerCard({name, onDelete}: Props){
       <ButtonIcon
         icon={'close'}
         type={'SECONDARY'}
-                 
+        onPress={onDelete}                 
       />
       
     </View>

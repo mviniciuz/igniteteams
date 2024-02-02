@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { View, FlatList, Alert, TextInput} from 'react-native';
 
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 import { AppError } from '@utils/AppError';
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
@@ -21,6 +21,7 @@ import { ListEmpty } from '@components/ListEmpty';
 
 import { styles } from './styles';
 import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
+import { groupRemoveByName } from '@storage/group/groupRemoveByName';
 
 type RouteParams = {
   group: string;
@@ -31,6 +32,8 @@ export function Players(){
   const [teams, setTeams] = useState(['Time A', 'Time B']);
   const [activeTeam, setActiveTeam] = useState('Time A');
   const [players, setPlayers] = useState<PlayerStorageDTO[]>();
+
+  const navigation = useNavigation();
 
   const route = useRoute();
 
@@ -47,7 +50,7 @@ export function Players(){
     try {
       const newPlayer = { 
         name: playerName,
-        teams: activeTeam,
+        team: activeTeam,
       }
 
       await playerAddByGroup(newPlayer, group);
@@ -79,6 +82,29 @@ export function Players(){
     }
   }
 
+  async function groupRemove(){
+    try {
+      await groupRemoveByName(group);
+      navigation.navigate('groups');    
+      
+    } catch (error) {
+      Alert.alert('Remover Grupo', 'Não é possível remover grupo');
+    }
+  }
+
+  async function handleRemoveGroup(){
+    Alert.alert('Remover Grupo', 'Deseja remover grupo?', [
+      {
+        text: 'Sim',
+        onPress: () => groupRemove()  ,
+      },
+      {
+        text: 'Não',
+        style: 'cancel'
+      },
+    ])
+  }
+
   async function fechtPlayersByTeam(){
     try {
       const playersByTeam = await playerGetByGroupAndTeam(group, activeTeam);
@@ -94,8 +120,6 @@ export function Players(){
       
     }
   }
-
-
 
   useEffect(()=>{
     fechtPlayersByTeam();
@@ -125,14 +149,14 @@ export function Players(){
       </View>
       
       <FlatList
-        style={styles.listTeam}        
+        style={styles.listTeam}
         keyExtractor={ item => item }
         data={teams}
         renderItem={( { item } )=>(
           <Filter
             title={item}
             isActive={ item === activeTeam ? true: false}
-            onPress={() =>setActiveTeam(item)}                        
+            onPress={() =>setActiveTeam(item)}                     
           />
         )}
         horizontal      
@@ -157,7 +181,8 @@ export function Players(){
       />
       <Button
        title='Remover Jogador'
-       type='secondary'       
+       type='secondary'
+       onPress={handleRemoveGroup}     
       />
     </SafeAreaView>
   )

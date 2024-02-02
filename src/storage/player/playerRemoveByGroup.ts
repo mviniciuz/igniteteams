@@ -7,7 +7,7 @@ export async function playerRemoveByGroup(playerName: string, group: string){
   try {
     const storage = await playerGetByGroup(group);
 
-    const filtered = storage.filter(player => player.name !== player.name);
+    const filtered = storage.filter(player => player.name !== playerName);
 
     const players = JSON.stringify(filtered);
 
